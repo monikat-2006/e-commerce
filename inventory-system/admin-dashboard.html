@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Inventory Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-page admin-page">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3>Admin Panel</h3>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="active" data-target="dashboard-overview"><i class="fas fa-chart-pie"></i> Dashboard Overview</a></li>
+            <li><a href="#" data-target="staff-management"><i class="fas fa-users"></i> Staff Management</a></li>
+            <li><a href="#" data-target="inventory-analytics"><i class="fas fa-chart-line"></i> Inventory Analytics</a></li>
+            <li><a href="#" data-target="financial-reports"><i class="fas fa-file-invoice-dollar"></i> Financial Reports</a></li>
+            <li><a href="#" data-target="system-settings"><i class="fas fa-cogs"></i> System Settings</a></li>
+            <li><a href="#" data-target="audit-log"><i class="fas fa-clipboard-list"></i> Audit Log</a></li>
+            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header class="top-header">
+            <div class="breadcrumb">
+                <span>Admin</span> > <span id="current-page-title">Dashboard Overview</span>
+            </div>
+            <div class="user-info">
+                <span>Welcome, Administrator</span>
+                <div class="avatar"><i class="fas fa-user-shield fa-2x"></i></div>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            
+            <section id="dashboard-overview" class="content-section active">
+                <h2>Dashboard Overview</h2>
+                <div class="kpi-cards">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-box"></i></div>
+                        <div class="card-info">
+                            <h3>Total Products</h3>
+                            <p>1,245</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="card-info">
+                            <h3>Total Stock Value</h3>
+                            <p>$124,500</p>
+                        </div>
+                    </div>
+                    <div class="card warning">
+                        <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="card-info">
+                            <h3>Low Stock Items</h3>
+                            <p>32</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-box">
+                        <h3>Stock Trends</h3>
+                        <canvas id="stockTrendChart"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>Top Selling Categories</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other sections placeholders -->
+            <section id="staff-management" class="content-section" style="display: none;">
+                <h2>Staff Management</h2>
+                <p>Manage staff accounts, assign roles, and track performance.</p>
+                <!-- Staff table would go here -->
+            </section>
+
+            <section id="inventory-analytics" class="content-section" style="display: none;">
+                <h2>Inventory Analytics</h2>
+                <p>Deep insights into stock movements.</p>
+            </section>
+
+            <section id="financial-reports" class="content-section" style="display: none;">
+                <h2>Financial Reports</h2>
+                <p>COGS, Profit Margins, Stock Turnover.</p>
+            </section>
+
+            <section id="system-settings" class="content-section" style="display: none;">
+                <h2>System Settings</h2>
+                <p>Configure backups, permissions, and alerts.</p>
+            </section>
+
+            <section id="audit-log" class="content-section" style="display: none;">
+                <h2>Audit Log</h2>
+                <p>System changes tracked for compliance.</p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

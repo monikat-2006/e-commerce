@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard - Inventory Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3>Inventory Sys</h3>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="active" data-target="dashboard-home"><i class="fas fa-home"></i> Dashboard Home</a></li>
+            <li><a href="#" data-target="inventory-management"><i class="fas fa-boxes"></i> Inventory Management</a></li>
+            <li><a href="#" data-target="activities-log"><i class="fas fa-history"></i> Activities Log</a></li>
+            <li><a href="#" data-target="settings"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header class="top-header">
+            <div class="breadcrumb">
+                <span>Staff</span> > <span id="current-page-title">Dashboard Home</span>
+            </div>
+            <div class="user-info">
+                <span>Welcome, Staff User</span>
+                <div class="avatar"><i class="fas fa-user-circle fa-2x"></i></div>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <!-- Sections will be toggled via JS -->
+            <section id="dashboard-home" class="content-section active">
+                <h2>Welcome to Staff Dashboard</h2>
+                <p>Select Inventory Management to start working.</p>
+            </section>
+
+            <section id="inventory-management" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2>Inventory Management</h2>
+                    <button class="btn btn-primary" id="addProductBtn"><i class="fas fa-plus"></i> Add Product</button>
+                </div>
+                
+                <div class="controls-bar">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="productSearch" placeholder="Search products...">
+                    </div>
+                    <div class="filters">
+                        <select id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Clothing">Clothing</option>
+                        </select>
+                        <select id="stockFilter">
+                            <option value="">All Status</option>
+                            <option value="in-stock">In Stock</option>
+                            <option value="low-stock">Low Stock</option>
+                            <option value="out-of-stock">Out of Stock</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table id="productsTable">
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Stock Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Supplier</th>
+                                <th>Last Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination">
+                    <!-- Pagination controls -->
+                    <span>Items per page: </span>
+                    <select id="itemsPerPage">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </section>
+
+            <section id="activities-log" class="content-section" style="display: none;">
+                <h2>Activities Log</h2>
+                <div class="controls-bar">
+                    <input type="date" id="dateFilterStart">
+                    <input type="date" id="dateFilterEnd">
+                    <select id="actionFilter">
+                        <option value="">All Actions</option>
+                        <option value="add">Added</option>
+                        <option value="edit">Edited</option>
+                        <option value="delete">Deleted</option>
+                    </select>
+                    <button class="btn btn-secondary"><i class="fas fa-file-csv"></i> Export CSV</button>
+                    <button class="btn btn-secondary"><i class="fas fa-file-pdf"></i> Export PDF</button>
+                </div>
+                <div class="table-container">
+                    <table id="activityTable">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Action</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Activities -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="settings" class="content-section" style="display: none;">
+                <h2>Settings</h2>
+                <div class="settings-form">
+                    <div class="form-group">
+                        <label>Update Password</label>
+                        <input type="password" placeholder="New Password">
+                    </div>
+                    <div class="form-group">
+                        <label>Language Preferences</label>
+                        <select><option>English</option><option>Spanish</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Notifications</label>
+                        <label><input type="checkbox" checked> Email alerts for low stock</label>
+                    </div>
+                    <button class="btn btn-primary">Save Changes</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modalTitle">Add Product</h2>
+            <form id="productForm">
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" id="prodName" required>
+                </div>
+                <div class="form-group">
+                    <label>SKU</label>
+                    <input type="text" id="prodSKU" required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" id="prodCategory" required>
+                </div>
+                <div class="form-group">
+                    <label>Unit Price</label>
+                    <input type="number" id="prodPrice" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Stock Quantity</label>
+                    <input type="number" id="prodQuantity" required>
+                </div>
+                <div class="form-group">
+                    <label>Supplier Name</label>
+                    <input type="text" id="prodSupplier">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="prodDesc"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Product Image</label>
+                    <input type="file" id="prodImage" accept="image/*">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/staff.js"></script>
+</body>
+</html>
